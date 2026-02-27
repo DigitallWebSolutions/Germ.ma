@@ -1,35 +1,102 @@
-import { ShoppingCart, MessageCircle } from 'lucide-react';
+import { X, ExternalLink } from 'lucide-react';
+import { useEffect } from 'react';
 import config from '../config.json';
 
-function StickyBar({ onOrderClick }) {
-  const handleWhatsAppClick = () => {
-    window.open(config.contact.whatsappLink, '_blank');
-  };
+const PRICE = 49.0;
+const CURRENCY = 'MAD';
+
+function PaymentModal({ isOpen, onClose, onPaymentSelect }) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-2xl z-40 pb-safe">
-      <div className="max-w-md mx-auto px-4 py-3">
-        <div className="text-center mb-2">
-          <p className="text-xs font-semibold text-gray-800">
-            {config.cta.stickyTextLine1}
-          </p>
-          <p className="text-xs text-gray-600">
-            {config.cta.stickyTextLine2}
-          </p>
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+      <div
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
+      ></div>
+
+      <div className="relative bg-white rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl animate-slide-up">
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between rounded-t-3xl">
+          <h3 className="text-xl font-bold text-gray-900">
+            {config.payment.modalTitle}
+          </h3>
+          <button
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-700 hover:scale-110 active:scale-95 transition-all duration-200"
+          >
+            <X size={24} />
+          </button>
         </div>
 
-        <div className="flex gap-2">
-          <button
-            onClick={onOrderClick}
-            className="flex-1 bg-gradient-to-r from-red-600 to-red-500 text-white font-bold py-3 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2"
-          >
-            <ShoppingCart size={20} />
-            <span>طلب الآن</span>
-          </button>
+        <div className="px-6 py-6">
+          <p className="text-sm text-gray-600 mb-6 leading-relaxed">
+            {config.payment.modalDescription}
+          </p>
+
+          <div className="space-y-3">
+            {config.payment.methods.map((method) => (
+              <button
+                key={method.id}
+                onClick={() => {
+                  // ✅ Event: payment method selected
+                  window.fbq?.('track', 'AddPaymentInfo', {
+                    value: PRICE,
+                    currency: CURRENCY,
+                  });
+
+                  window.fbq?.('trackCustom', 'PaymentMethodSelected', {
+                    method: method.name,
+                    methodId: method.id,
+                    value: PRICE,
+                    currency: CURRENCY,
+                  });
+
+                  // This will open WhatsApp from App.jsx (or parent)
+                  onPaymentSelect(method);
+                }}
+                className="w-full bg-gradient-to-r from-gray-50 to-gray-100 border-2 border-gray-200 rounded-2xl p-4 flex items-center justify-between hover:border-red-500 hover:shadow-lg hover:scale-102 active:scale-98 transition-all duration-200 group"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow duration-200">
+                    <img
+                      src={method.icon}
+                      alt={method.name}
+                      className="w-8 h-8 object-contain"
+                    />
+                  </div>
+                  <span className="font-semibold text-gray-900 text-lg">
+                    {method.name}
+                  </span>
+                </div>
+
+                <ExternalLink
+                  size={20}
+                  className="text-gray-400 group-hover:text-red-500 transition-colors duration-200"
+                />
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-6 bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+            <p className="text-xs text-yellow-800 leading-relaxed text-center">
+              بعد اختيار وسيلة الدفع، سيتم فتح الواتساب تلقائياً مع رسالة جاهزة
+            </p>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default StickyBar;
+export default PaymentModal;
