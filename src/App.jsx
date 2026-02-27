@@ -9,11 +9,21 @@ import StickyBar from './components/StickyBar';
 import Toast from './components/Toast';
 import config from './config.json';
 
+const PRICE_NUMBER = Number(String(config?.pricing?.price || '49').replace(/[^\d.]/g, '')) || 49;
+const CURRENCY = 'MAD';
+
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
 
   useEffect(() => {
+    // (اختياري) Event: page content viewed
+    window.fbq?.('track', 'ViewContent', {
+      value: PRICE_NUMBER,
+      currency: CURRENCY,
+      content_name: config?.product?.name,
+    });
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -35,10 +45,31 @@ function App() {
   }, []);
 
   const handleOrderClick = () => {
+    // ✅ Event: user clicked order button (start checkout)
+    window.fbq?.('track', 'InitiateCheckout', {
+      value: PRICE_NUMBER,
+      currency: CURRENCY,
+      content_name: config?.product?.name,
+    });
+
     setIsModalOpen(true);
   };
 
   const handlePaymentSelect = (method) => {
+    // ✅ Event: main conversion (open WhatsApp)
+    window.fbq?.('track', 'Lead', {
+      value: PRICE_NUMBER,
+      currency: CURRENCY,
+      content_name: config?.product?.name,
+    });
+
+    window.fbq?.('trackCustom', 'WhatsAppOpen', {
+      method: method?.name,
+      methodId: method?.id,
+      value: PRICE_NUMBER,
+      currency: CURRENCY,
+    });
+
     const message = config.payment.whatsappMessageTemplate
       .replace('{{productName}}', config.product.name)
       .replace('{{price}}', config.pricing.price)
@@ -61,12 +92,15 @@ function App() {
         <Details />
         <OfferReminder onOrderClick={handleOrderClick} />
       </main>
+
       <StickyBar onOrderClick={handleOrderClick} />
+
       <PaymentModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onPaymentSelect={handlePaymentSelect}
       />
+
       <Toast message={toastMessage} onClose={() => setToastMessage('')} />
     </div>
   );
