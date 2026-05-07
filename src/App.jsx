@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import Features from './components/Features';
-import Details from './components/Details';
 import OfferReminder from './components/OfferReminder';
 import PaymentModal from './components/PaymentModal';
 import StickyBar from './components/StickyBar';
@@ -88,8 +86,6 @@ function App() {
       <Header />
       <main className="pb-24">
         <Hero onOrderClick={handleOrderClick} />
-        <Features />
-        <Details />
         <OfferReminder onOrderClick={handleOrderClick} />
       </main>
 
