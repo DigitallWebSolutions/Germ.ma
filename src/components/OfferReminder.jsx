@@ -3,15 +3,15 @@ import config from '../config.json';
 
 function OfferReminder({ onOrderClick }) {
   return (
-    <section className="bg-white px-4 py-8">
-      <div className="max-w-md mx-auto animate-section">
-        <div className="bg-gradient-to-br from-red-500 to-yellow-500 rounded-3xl p-6 text-white shadow-2xl">
+    <section className="bg-white px-4 py-8 md:py-12">
+      <div className="mx-auto max-w-md animate-section md:max-w-3xl">
+        <div className="bg-gradient-to-br from-red-500 to-yellow-500 rounded-3xl p-6 text-white shadow-2xl md:p-8">
           <div className="flex items-center gap-2 mb-4">
             <Gift size={28} />
-            <h3 className="text-2xl font-bold">{config.offer.reminderTitle}</h3>
+            <h3 className="text-2xl font-bold md:text-3xl">{config.offer.reminderTitle}</h3>
           </div>
 
-          <p className="text-base leading-relaxed mb-6 bg-white/20 backdrop-blur-sm rounded-xl p-4">
+          <p className="text-base leading-relaxed mb-6 bg-white/20 backdrop-blur-sm rounded-xl p-4 md:p-5 md:text-lg">
             {config.offer.reminderText}
           </p>
 
@@ -33,7 +33,7 @@ function OfferReminder({ onOrderClick }) {
 
           <button
             onClick={onOrderClick}
-            className="w-full bg-white text-red-600 font-bold text-lg py-4 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all duration-200"
+            className="w-full bg-white text-red-600 font-bold text-lg py-4 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 md:mx-auto md:block md:max-w-xl md:text-xl"
           >
             {config.cta.mainButtonText}
           </button>

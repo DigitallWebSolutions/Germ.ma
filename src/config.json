@@ -1,8 +1,8 @@
 {
   "brand": {
-    "name": "Germ.ma",
+    "name": "germ.ma",
     "tagline": "الألمانية للمغاربة",
-    "logo": "icons/logo-germ.svg"
+    "logo": "/image/logo.png"
   },
   "contact": {
     "phone": "+212725240109",

@@ -1,24 +1,32 @@
-import { BookOpen } from 'lucide-react';
 import config from '../config.json';
 
 function Header() {
   return (
-    <header className="bg-gradient-to-r from-red-600 via-yellow-500 to-red-600 text-white py-3 px-4 sticky top-0 z-50 shadow-lg">
-      <div className="max-w-md mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <BookOpen size={28} className="text-white" />
-          <div>
-            <h1 className="text-xl font-bold">{config.brand.name}</h1>
-            <p className="text-xs opacity-90">{config.brand.tagline}</p>
+    <header className="bg-gradient-to-r from-red-600 via-yellow-500 to-red-600 text-white py-3 px-4 sm:px-6 sticky top-0 z-50 shadow-lg">
+      <div className="mx-auto flex w-full max-w-md items-center justify-between gap-4 md:max-w-5xl">
+        <div className="flex min-w-0 items-center gap-2">
+          <img
+            src="/image/logo.png"
+            alt="germ.ma"
+            className="h-10 w-10 shrink-0 rounded-full object-cover bg-white"
+          />
+          <div className="min-w-0">
+            <h1 className="text-xl font-black md:text-2xl">germ.ma</h1>
           </div>
         </div>
         <a
           href={config.contact.whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-white text-red-600 px-3 py-1.5 rounded-full text-sm font-semibold hover:scale-105 active:scale-95 transition-all duration-200"
+          className="inline-flex shrink-0 items-center gap-2 bg-white text-red-600 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-sm md:text-base font-bold hover:scale-105 active:scale-95 transition-all duration-200"
         >
-          اتصل بنا
+          <img
+            src="/icons/whatsapp.png"
+            alt=""
+            aria-hidden="true"
+            className="h-5 w-5"
+          />
+          <span>WhatsApp</span>
         </a>
       </div>
     </header>
