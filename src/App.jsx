@@ -54,7 +54,7 @@ function App() {
   };
 
   const handlePaymentSelect = (method) => {
-    // ✅ Event: main conversion (open WhatsApp)
+    // Event: main conversion (open WhatsApp)
     window.fbq?.('track', 'Lead', {
       value: PRICE_NUMBER,
       currency: CURRENCY,
@@ -68,23 +68,24 @@ function App() {
       currency: CURRENCY,
     });
 
-    const message = config.payment.whatsappMessageTemplate
-      .replace('{{productName}}', config.product.name)
-      .replace('{{price}}', config.pricing.price)
-      .replace('{{paymentMethod}}', method.name);
+    const message = config.payment.whatsappMessageTemplate.replace(
+      '{{paymentMethod}}',
+      method.name
+    );
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${config.contact.phone}?text=${encodedMessage}`;
+    const whatsappPhone = String(config.contact.phone).replace(/\D/g, '');
+    const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodedMessage}`;
 
     window.open(whatsappUrl, '_blank');
     setIsModalOpen(false);
-    setToastMessage('تم فتح الواتساب - أكمل طلبك الآن!');
+    setToastMessage('تم فتح الواتساب - كمّل طلبك دابا!');
   };
 
   return (
     <div className="min-h-screen bg-gray-50" dir="rtl">
-      <Header />
-      <main className="pb-24">
+      <Header onOrderClick={handleOrderClick} />
+      <main className="pb-40 sm:pb-28">
         <Hero onOrderClick={handleOrderClick} />
         <OfferReminder onOrderClick={handleOrderClick} />
       </main>

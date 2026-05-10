@@ -15,7 +15,7 @@
     "promoText": "🔥 عرض استثنائي بـ49 درهم فقط! (لفترة محدودة)"
   },
   "product": {
-    "name": "الحزمة الشاملة لتعلم الألمانية",
+    "name": "الحزمة الشاملة لتعلم الألمانية من A1 حتى C2",
     "shortTitle": "تعلم الألمانية من A1 حتى C2 بدون أستاذ",
     "shortDescription": "ملفات PDF، تسجيلات صوتية، فيديوهات، مكتبة Ausbildung، وامتحانات Goethe / TELC / ÖSD لجميع المستويات.",
     "levels": ["A1", "A2", "B1", "B2", "C1", "C2"],
@@ -56,30 +56,39 @@
     ]
   },
   "offer": {
+    "topTitle": "الحزمة الشاملة لتعلم الألمانية من A1 حتى C2",
+    "topPrice": "49 درهم فقط",
     "reminderTitle": "🎁 تذكير مهم:",
     "reminderText": "العرض مزال مستمر لفترة محدودة فقط. استفد من حزمة شاملة لتعلم الألمانية من A1 إلى C2 في 180 يوم مع نماذج الامتحانات والتسجيلات الصوتية وكتب التحضير لجميع الشهادات غير بـ49 درهم فقط.",
     "benefits": [
       "طلب واحد فقط والملفات كتبقى عندك مدى الحياة.",
       "تحديثات دورية للملفات وإضافة أكثر من 5000–8000 ملف كهدية.",
       "دعم كامل عبر الواتساب للإجابة على استفساراتك."
+    ],
+    "trustItems": [
+      "✅ الدفع آمن",
+      "✅ التوصل فواتساب مباشرة بعد تأكيد الطلب",
+      "✅ ملفات كثيرة ومنظمة حسب المستوى",
+      "✅ مناسب للمبتدئين من A1 حتى C2"
     ]
   },
   "cta": {
     "mainButtonText": "طلب الحزمة الآن",
-    "secondaryButtonText": "تواصل بالواتساب",
+    "secondaryButtonText": "طلب الحزمة الآن",
     "stickyTextLine1": "بغيتي تستافد قبل ما يسالي العرض؟",
-    "stickyTextLine2": "يمكن لك تطلب الحزمة أو تتواصل مباشرة في الواتساب."
+    "stickyTextLine2": "الثمن 49 درهم فقط والتوصل عبر واتساب."
   },
   "payment": {
     "modalTitle": "اختر وسيلة الدفع",
-    "modalDescription": "اختَر الطريقة اللي تناسبك وسيتم إرسال التفاصيل لك في الواتساب.",
+    "modalDescription": "اختر الطريقة اللي تناسبك وسيتم إرسال التفاصيل لك في الواتساب.",
+    "priceLine": "الثمن: 49 درهم فقط",
     "methods": [
       { "id": "cih", "name": "CIH Bank", "icon": "/payment/1.svg" },
       { "id": "cashplus", "name": "CashPlus", "icon": "/payment/2.svg" },
       { "id": "inwi", "name": "Inwi Money", "icon": "/payment/3.svg" },
       { "id": "baridbank", "name": "BaridBank", "icon": "/payment/4.svg" }
     ],
-    "whatsappMessageTemplate": "السلام عليكم، بغيت نطلب الحزمة:\nالحزمة: {{productName}}\nالثمن: {{price}}\nطريقة الدفع: {{paymentMethod}}\nالمرجو إتمام الطلب عبر هذه الوسيلة.\nشكراً 🙏"
+    "whatsappMessageTemplate": "السلام عليكم، بغيت نطلب الحزمة الشاملة لتعلم الألمانية.\n\nالثمن: 49 درهم\nوسيلة الدفع: {{paymentMethod}}\n\nالمرجو إرسال تفاصيل الدفع."
   },
   "assets": {
     "studentImage": "images/student.png",
@@ -92,7 +101,7 @@
       "library": "icons/library.svg",
       "certificate": "icons/certificate.svg",
       "flag": "icons/flag-de.svg",
-      "whatsapp": "icons/whatsapp.png"
+      "whatsapp": "/icons/what.jpg"
     }
   }
 }

@@ -31,9 +31,18 @@ function OfferReminder({ onOrderClick }) {
             })}
           </div>
 
+          <div className="mb-6 space-y-2 rounded-2xl bg-white p-4 text-right text-gray-900 shadow-lg md:p-5">
+            {config.offer.trustItems.map((item) => (
+              <p key={item} className="text-sm font-bold leading-relaxed md:text-base">
+                {item}
+              </p>
+            ))}
+          </div>
+
           <button
+            type="button"
             onClick={onOrderClick}
-            className="w-full bg-white text-red-600 font-bold text-lg py-4 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 md:mx-auto md:block md:max-w-xl md:text-xl"
+            className="w-full rounded-full bg-white px-5 py-4 text-lg font-bold leading-normal text-red-600 shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 md:mx-auto md:block md:max-w-xl md:text-xl"
           >
             {config.cta.mainButtonText}
           </button>
