@@ -6,6 +6,7 @@ import PaymentModal from './components/PaymentModal';
 import StickyBar from './components/StickyBar';
 import Toast from './components/Toast';
 import config from './config.json';
+import { trackMetaPixel, trackMetaPixelCustom } from './utils/metaPixel';
 
 const PRICE_NUMBER = Number(String(config?.pricing?.price || '49').replace(/[^\d.]/g, '')) || 49;
 const CURRENCY = 'MAD';
@@ -16,7 +17,7 @@ function App() {
 
   useEffect(() => {
     // (اختياري) Event: page content viewed
-    window.fbq?.('track', 'ViewContent', {
+    trackMetaPixel('ViewContent', {
       value: PRICE_NUMBER,
       currency: CURRENCY,
       content_name: config?.product?.name,
@@ -44,7 +45,7 @@ function App() {
 
   const handleOrderClick = () => {
     // ✅ Event: user clicked order button (start checkout)
-    window.fbq?.('track', 'InitiateCheckout', {
+    trackMetaPixel('InitiateCheckout', {
       value: PRICE_NUMBER,
       currency: CURRENCY,
       content_name: config?.product?.name,
@@ -55,13 +56,13 @@ function App() {
 
   const handlePaymentSelect = (method) => {
     // Event: main conversion (open WhatsApp)
-    window.fbq?.('track', 'Lead', {
+    trackMetaPixel('Lead', {
       value: PRICE_NUMBER,
       currency: CURRENCY,
       content_name: config?.product?.name,
     });
 
-    window.fbq?.('trackCustom', 'WhatsAppOpen', {
+    trackMetaPixelCustom('WhatsAppOpen', {
       method: method?.name,
       methodId: method?.id,
       value: PRICE_NUMBER,

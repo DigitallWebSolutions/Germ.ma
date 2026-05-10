@@ -1,4 +1,5 @@
 import config from '../config.json';
+import { trackMetaPixel } from '../utils/metaPixel';
 
 function Header() {
   const whatsappPhone = String(config.contact.phone).replace(/\D/g, '');
@@ -21,6 +22,7 @@ function Header() {
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => trackMetaPixel('Contact')}
           className="inline-flex max-w-[160px] shrink-0 items-center justify-center gap-1.5 rounded-full bg-white px-3 py-2 text-center text-xs font-bold leading-normal text-red-600 transition-all duration-200 hover:scale-105 active:scale-95 sm:max-w-none sm:gap-2 sm:px-4 sm:text-sm md:px-5 md:text-base"
           aria-label="WhatsApp"
         >

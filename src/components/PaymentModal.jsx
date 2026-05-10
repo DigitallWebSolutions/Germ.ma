@@ -1,6 +1,7 @@
 import { X, ExternalLink } from 'lucide-react';
 import { useEffect } from 'react';
 import config from '../config.json';
+import { trackMetaPixel, trackMetaPixelCustom } from '../utils/metaPixel';
 
 const PRICE = Number(String(config?.pricing?.price || '49').replace(/[^\d.]/g, '')) || 49;
 const CURRENCY = 'MAD';
@@ -55,12 +56,12 @@ function PaymentModal({ isOpen, onClose, onPaymentSelect }) {
                 type="button"
                 key={method.id}
                 onClick={() => {
-                  window.fbq?.('track', 'AddPaymentInfo', {
+                  trackMetaPixel('AddPaymentInfo', {
                     value: PRICE,
                     currency: CURRENCY,
                   });
 
-                  window.fbq?.('trackCustom', 'PaymentMethodSelected', {
+                  trackMetaPixelCustom('PaymentMethodSelected', {
                     method: method.name,
                     methodId: method.id,
                     value: PRICE,
