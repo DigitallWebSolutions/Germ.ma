@@ -84,7 +84,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50" dir="rtl">
-      <Header onOrderClick={handleOrderClick} />
+      <Header />
       <main className="pb-40 sm:pb-28">
         <Hero onOrderClick={handleOrderClick} />
         <OfferReminder onOrderClick={handleOrderClick} />
